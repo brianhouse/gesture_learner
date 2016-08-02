@@ -34,9 +34,9 @@ class Listener(Leap.Listener):
             joint_positions.append(self.scale(self.transform(finger.bone(finger.JOINT_PIP).prev_joint).to_tuple()))
             self.finger_positions.append(joint_positions)
         self.queue.put((self.hand_position, self.finger_positions))
-        # data = self.flatten(self.finger_positions)
-        # log.info("/joints %s" % len(data))
-        # sender.send("/joints", data)
+        data = self.flatten(self.finger_positions)
+        log.info("/wek/inputs %s" % len(data))
+        sender.send("/wek/inputs", data)
 
     def transform(self, joint):
         return joint
